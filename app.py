@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, session, redirect
 from flask_pymongo import PyMongo
 from flask_bootstrap import Bootstrap
 import google.cloud
+import googlemaps
 import bcrypt
 
 app = Flask(__name__)
@@ -19,8 +20,8 @@ app.config['SECRET_KEY'] = "THISISSECRET"
 
 @app.route('/')
 def index():
-    if session.get('logged_in'):
-        return render_template('loggedIndex.html', name=session['username'])
+    if session.get('logged_in') and session.get('lat_long'):
+        return render_template('loggedIndex.html', name=session['username'], lat = session['lat_long']['lat'], lng =session['lat_long']['lng'])
 
     return render_template('index.html')
 
@@ -50,6 +51,14 @@ def login():
             if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
                 session['username'] = request.form['username']
                 session['logged_in']=True
+
+                address = login_user['address']
+                city = login_user['city']
+                zipcode = login_user['zipcode']
+                totalQuery = "%s, %s, %s" % (address, city, zipcode)
+                gmaps = googlemaps.Client(key='AIzaSyBpTKOfOdXY27Plw6m0OnhAixPIB7mD9xQ')
+                session['lat_long'] = gmaps.geocode(totalQuery)[0]['geometry']['location']
+
                 return redirect(url_for('index'))
 
         return 'Invalid username/password combination'
@@ -60,7 +69,8 @@ def registerPatient():
     if session.get('logged_in'):
         if request.method == 'POST':
             patients = mongo.db.patients
-            patients.insert({'hospital' : session['username'], 'name' : request.form['patientName'], 'hospital' : session['username']})
+            patients.insert({'hospital' : session['username'], 'name' : request.form['name'], 'height' : request.form['height'], \
+            'weight' : request.form['weight'], 'age' : request.form['age'], 'bloodtype' : request.form['bloodtype'], 'gender': request.form['gender'], 'birthdate' : request.form['birthdate']})
             return render_template('return.html', success = "Success")
 
     return render_template('registerPatient.html')
