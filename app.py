@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = "THISISSECRET"
 @app.route('/')
 def index():
     if session.get('logged_in'):
-        return render_template('logged_index.html', name=session['username'])
+        return render_template('loggedIndex.html', name=session['username'])
 
     return render_template('index.html')
 
@@ -59,14 +59,14 @@ def login():
 def registerPatient():
     if session.get('logged_in'):
         if request.method == 'POST':
-            patientID = uuid.uuid4()
-            hospitalID
-            session['username'] = request.form['username']
-            return redirect(url_for('index'))
+            print request.form['patientName']
+            print uuid.uuid4()
+            print session['username']
+            return render_template('loggedIndex.html')
 
             return 'That username already exists!'
 
-    return render_template('index.html')
+    return render_template('registerPatient.html')
 
 @app.route('/logout')
 def logout():
