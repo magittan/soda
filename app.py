@@ -4,7 +4,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from flask_mongoengine import MongoEngine
 from mongoengine import StringField, EmailField
-from form import LoginForm
 
 app = Flask(__name__)
 bootstrap = Bootstrap()
