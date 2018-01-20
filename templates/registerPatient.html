@@ -5,10 +5,11 @@
         <div class="col-md-4 col-md-offset-4">
             <form method=POST action="{{ url_for('registerPatient') }}">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Patient Name</label>
-                    <input type="text" class="form-control" name="patientName" placeholder="Patient Name">
+                    <label for="exampleInputName1">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Patient Name">
                 </div>
                 <div class="form-group">
+<<<<<<< HEAD
                     <label for="exampleInputEmail1">Patient Age</label>
                     <input type="number" class="form-control" name="patientAge" placeholder="Patient Age">
                 </div>
@@ -40,7 +41,39 @@
                     <label for="exampleInputEmail1">Medical Urgency Rating (1-5, where 5 is life-threatening urgent)</label>
                     <input type="number" class="form-control" name="medicalUrgency" placeholder="Patient Social Security Number">
 
+=======
+                    <label for="exampleInputAge1">Age</label>
+                    <input type="number" class="form-control" name="age" placeholder="Patient Age">
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputHeight1">Height</label>
+                    <input type="number" class="form-control" name="height" placeholder="Patient Height">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputWeight1">Weight</label>
+                    <input type="number" class="form-control" name="weight" placeholder="Patient Weight">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputBirthdate1">Birthdate</label>
+                    <input type="date" class="form-control" name="birthdate" placeholder="Patient Birthdate">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputBlood1">Bloodtype</label>
+                    <input type="text" class="form-control" name="bloodtype" placeholder="Bloodtype">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Gender</label>
+                    <input type="text" class="form-control" name="gender" placeholder="Patient Gender">
+                </div>
+
+                <div class="form-group">
+                  <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
+                     <input id="fileupload" name="myfile" type="file" />
+                     <input type="submit" value="submit" id="submit" />
+                  </form>
+>>>>>>> e5912e38e903c5555b92061af1f3ed101bed4652
+                </div>
+
                 <fieldset>
   <legend>Polyuria?</legend>
   <div>
@@ -192,12 +225,20 @@
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" name="pass" placeholder="Password">
                 </div>
+                <div class="form-group">
+                  <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
+                     <input id="fileupload" name="myfile" type="file" />
+                     <input type="submit" value="submit" id="submit" />
+                  </form>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block">Log In</button>
             </form>
             <br>
+
             <div>
-                Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a>.
+                {{success}}!
             </div>
+
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 from flask import Flask, render_template, url_for, request, session, redirect
 from flask_pymongo import PyMongo
 from flask_bootstrap import Bootstrap
+import google.cloud
 import bcrypt
-import uuid
 
 app = Flask(__name__)
 
@@ -32,7 +32,7 @@ def signup():
 
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'name' : request.form['username'], 'password' : hashpass})
+            users.insert({'name' : request.form['username'], 'password' : hashpass , 'address' : request.form['address'], 'zipcode' : request.form['zipcode'], 'city' : request.form['city']})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
 
@@ -59,14 +59,18 @@ def login():
 def registerPatient():
     if session.get('logged_in'):
         if request.method == 'POST':
-            print request.form['patientName']
-            print uuid.uuid4()
-            print session['username']
-            return render_template('loggedIndex.html')
-
-            return 'That username already exists!'
+            patients = mongo.db.patients
+            patients.insert({'hospital' : session['username'], 'name' : request.form['patientName'], 'hospital' : session['username']})
+            return render_template('return.html', success = "Success")
 
     return render_template('registerPatient.html')
+
+@app.route('/patients')
+#waits for a post request in order to get an image
+def patients():
+    patients = mongo.db.patients
+
+    return render_template('patients.html')
 
 @app.route('/logout')
 def logout():
