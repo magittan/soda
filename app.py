@@ -1,10 +1,12 @@
 from flask import Flask, render_template, url_for, request, session, redirect
 from flask_pymongo import PyMongo
 from flask_bootstrap import Bootstrap
+from haversine import haversine
 import google.cloud
 import googlemaps
 import bcrypt
 import pprint
+
 
 app = Flask(__name__)
 
@@ -69,61 +71,6 @@ def login():
 def registerPatient():
     if session.get('logged_in'):
         if request.method == 'POST':
-            print request.form['patientType']
-            print 'hospital'
-            print session['username']
-            print 'name'
-            print request.form['name']
-            print 'height'
-            print request.form['height']
-            print 'weight'
-            print request.form['weight']
-            print 'age'
-            print request.form['age']
-            print 'bloodtype'
-            print request.form['bloodtype']
-            print 'gender'
-            print request.form['gender']
-            print 'birthdate'
-            print request.form['birthdate']
-            print 'polyuria'
-            print request.form['polyuria']
-            print 'urine'
-            print request.form['urine']
-            print 'kidneyDisease'
-            print request.form['kidneyDisease']
-            print 'seizures'
-            print request.form['seizures']
-            print 'palpitations'
-            print request.form['palpitations']
-            print 'smoking'
-            print request.form['smoking']
-            print 'insomnia'
-            print request.form['insomnia']
-            print 'blurredVision'
-            print request.form['blurredVision']
-            print 'HIVHepa'
-            print request.form['HIVHepa']
-            print 'eyes'
-            print request.form['patientEyes']
-            print 'patientLungs'
-            print request.form['patientLungs']
-            print 'patientLungs'
-            print request.form['patientLungs']
-            print 'patientENT'
-            print request.form['patientENT']
-            print 'patientCardiovascular'
-            print request.form['patientCardiovascular']
-            print 'patientGastrointestinal'
-            print request.form['patientGastrointestinal']
-            print 'patientAllergic'
-            print request.form['patientAllergic']
-            print 'patientLymphatic'
-            print request.form['patientLymphatic']
-            print 'patientType'
-            print request.form['patientType']
-            print 'organRequest'
-
             if request.form['patientType']=='donor':
                 donors = mongo.db.donors
                 donors.insert({'hospital' : session['username'], 'name' : request.form['name'], 'height' : request.form['height'], \
@@ -143,24 +90,88 @@ def registerPatient():
 
     return render_template('registerPatient.html')
 
-@app.route('/patients')
-def patients():
-    users = mongo.db.donors
-    check = users.find({'hospital' : 'New Hope Hospital'})
-    for i in check:
-        print i
-    return render_template('patients.html')
 
-@app.route('/donate')
+@app.route('/donate', methods=['GET', 'POST'])
 def donate():
+    print "running"
     if request.method == 'POST':
-        users = mongo.db.users
-        login_user = users.find_one({'name' : request.form['deadman']})
-        hospital = request.form['hospital']
-        timeOfDeath = request.form['timeOfDeath']
-        
+        session['deadman'] = request.form['deadman']
+
     return render_template('donate.html')
 
+@app.route('/patients')
+def patients():
+    acceptor_li = mongo.db.acceptors.find()
+    mint=4
+    for acceptor in acceptor_li:
+        tempo=mongo.db.users.find_one({"name": acceptor["hospital"]})
+        address = tempo["address"].encode('utf-8')
+        city = tempo['city']
+        zipcode = tempo['zipcode']
+        totalQuery = "%s, %s, %s" % (address, city, zipcode)
+        gmaps = googlemaps.Client(key='AIzaSyBpTKOfOdXY27Plw6m0OnhAixPIB7mD9xQ')
+        tempo2 = gmaps.geocode(totalQuery)[0]['geometry']['location']
+        a_hospital_tuple= (tempo2["lat"], tempo2["lng"] )
+        d_hospital_tuple= (session['lat_long']["lat"], session['lat_long']["lng"] )
+
+        distance_difference= haversine(d_hospital_tuple, a_hospital_tuple)
+
+        donors = mongo.db.donors
+        donor = donors.find_one({"name": session['deadman']})
+
+        try:
+            ah = float(acceptor["height"].encode('utf-8'))
+            dh = float(donor["height"].encode('utf-8'))
+            aw = float(acceptor["weight"].encode('utf-8'))
+            dw = float(donor["weight"].encode('utf-8'))
+            dh = float(donor["height"].encode('utf-8'))
+            aa = float(acceptor["age"].encode('utf-8'))
+            da = float(donor["age"].encode('utf-8'))
+        except:
+            return "No exist"
+
+        height_difference= (ah-dh)/ah
+        weight_difference= (aw-dw)/aw
+        age_difference= (aa-da)/aa
+
+        best_acceptor = ''
+
+        if(acceptor["organRequest"].encode('utf-8')=="heart"):
+            if("infect" in donor["patientCardiovascular"].encode('utf-8')):
+                print("Donor can't donate a heart because of his heart health history/OR current Cardiovascular condition")
+                #THIS PATIENT'S HEART IS NOT FIT FOR DONATION
+            else:
+                if (donor["bloodtype"].encode('utf-8')== acceptor["bloodtype"].encode('utf-8')):
+                    suma=distance_difference+ height_difference + weight_difference + age_difference
+                    if(suma<mint):
+                        mint=suma
+                        best_acceptor= acceptor["name"]
+
+        if(acceptor["organRequest"].encode('utf-8')=="lungs"):
+            if ("infect" in donor["patientLungs"].encode('utf-8') or donor["smoking"].encode('utf-8')=="yes"):
+                print("Donor can't donate a lung because of his lung health history/OR current respiratory condition")
+                exit()
+                #THIS PATIENT'S lUNGS ARE NOT FIT FOR DONATION
+            if (donor["bloodtype"].encode('utf-8') == acceptor["bloodtype"].encode('utf-8')):
+                    suma=distance_difference+ height_difference + weight_difference + age_difference
+                    if(suma<mint):
+                        mint=suma
+                        best_acceptor= acceptor["name"]
+
+        statement = "They don't match!"
+
+        if(acceptor["organRequest"].encode('utf-8')=="kidney"):
+            if(donor["kidneyDisease"].encode('utf-8')=="yes" or donor["urine"].encode('utf-8')=="yes" or donor["Polyuria"].encode('utf-8')== "yes"):
+                statement = "Donor can't donate a kidney because of his kidney history/OR current kidney condition"
+                #THIS PATIENT'S KIDNEY IS NOT FIT FOR DONATION
+            elif (donor["bloodtype"].encode('utf-8')== acceptor["bloodtype"].encode('utf-8')):
+                suma=distance_difference+ height_difference + weight_difference + age_difference
+                if(suma<mint):
+                    mint=suma
+                    best_acceptor= acceptor["name"].encode('utf-8')
+                statement = "The deceased donor's " + acceptor["organRequest"]+ " has been matched with the acceptor patient " + best_acceptor + " !" + "The patient " + best_acceptor + " has been transferred the organ kidney and their life has been saved!"
+
+        return render_template('saved.html', istatement = statement)
 
 @app.route('/logout')
 def logout():
