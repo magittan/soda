@@ -1,5 +1,8 @@
 {% extends "loggedBase.html" %}
 {% block content %}
+<div>
+  <h1>{{success}}</h1>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -33,6 +36,9 @@
                     <input type="text" class="form-control" name="gender" placeholder="Patient Gender">
                 </div>
 
+<<<<<<< HEAD
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+=======
 
                 <div>
                     <legend>Patient Self-reported medical conditions and history </legend>
@@ -254,13 +260,9 @@
                   </form>
                 </div>
 <button type="submit" class="btn btn-primary btn-block"> REGISTER</button>
+>>>>>>> 397a41ea66f6d9cff5ac33ccbb79312b204edade
             </form>
             <br>
-
-            <div>
-                {{success}}!
-            </div>
-
         </div>
     </div>
 </div>
