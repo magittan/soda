@@ -9,39 +9,6 @@
                     <input type="text" class="form-control" name="name" placeholder="Patient Name">
                 </div>
                 <div class="form-group">
-<<<<<<< HEAD
-                    <label for="exampleInputEmail1">Patient Age</label>
-                    <input type="number" class="form-control" name="patientAge" placeholder="Patient Age">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Patient Height</label>
-                    <input type="number" class="form-control" name="patientAge" placeholder="Patient Age">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Patient Weight</label>
-                    <input type="number" class="form-control" name="patientWeight" placeholder="Patient Weight">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Patient Birthdate</label>
-                    <input type="date" class="form-control" name="patientBirthdate" placeholder="Patient Birthdate">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Patient Bloodgroup</label>
-                    <input type="text" class="form-control" name="patientBloodgroup" placeholder="Patient Bloodgroup">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Patient Gender</label>
-                    <input type="text" class="form-control" name="patientGender" placeholder="Patient Gender">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Patient SSN</label>
-                    <input type="number" class="form-control" name="patientSSN" placeholder="Patient Social Security Number">
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Medical Urgency Rating (1-5, where 5 is life-threatening urgent)</label>
-                    <input type="number" class="form-control" name="medicalUrgency" placeholder="Patient Social Security Number">
-
-=======
                     <label for="exampleInputAge1">Age</label>
                     <input type="number" class="form-control" name="age" placeholder="Patient Age">
                 </div>
@@ -71,8 +38,12 @@
                      <input id="fileupload" name="myfile" type="file" />
                      <input type="submit" value="submit" id="submit" />
                   </form>
->>>>>>> e5912e38e903c5555b92061af1f3ed101bed4652
                 </div>
+
+
+                <div>
+                    <legend>Patient Self-reported medical conditions and history </legend>
+                  </div>
 
                 <fieldset>
   <legend>Polyuria?</legend>
@@ -87,13 +58,25 @@
 </fieldset>
 
 <fieldset>
-<legend>Polyuria?</legend>
+<legend>Brown, red, or purple urine?</legend>
 <div>
-<input type="checkbox" id="yes" name="Polyuria" value="yes">
+<input type="checkbox" id="yes" name="urine" value="yes">
 <label for="Yes">Yes</label>
 </div>
 <div>
-<input type="checkbox" id="no" name="Polyuria" value="no">
+<input type="checkbox" id="no" name="urine" value="no">
+<label for="No">No</label>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>Kidney Disease?</legend>
+<div>
+<input type="checkbox" id="yes" name="kidneyDisease" value="yes">
+<label for="Yes">Yes</label>
+</div>
+<div>
+<input type="checkbox" id="no" name="kidneyDisease" value="no">
 <label for="No">No</label>
 </div>
 </fieldset>
@@ -116,8 +99,23 @@
 <input type="checkbox" id="yes" name="palpitations" value="yes">
 <label for="Yes">Yes</label>
 </div>
+
 <div>
 <input type="checkbox" id="no" name="palpitations" value="no">
+<label for="No">No</label>
+</div>
+</fieldset>
+
+
+<fieldset>
+<legend>Have you smoked for more than 20 years?</legend>
+<div>
+<input type="checkbox" id="yes" name="smoking" value="yes">
+<label for="Yes">Yes</label>
+</div>
+
+<div>
+<input type="checkbox" id="no" name="smoking" value="no">
 <label for="No">No</label>
 </div>
 </fieldset>
@@ -164,8 +162,14 @@
 </div>
 
 <div class="form-group">
-    <label for="exampleInputEmail1">P\Eyes</label>
+    <label for="exampleInputEmail1">Eyes</label>
     <input type="text" class="form-control" name="patientEyes" placeholder="Eyes Review">
+</div>
+
+
+<div class="form-group">
+    <label for="exampleInputEmail1">Respiratory</label>
+    <input type="text" class="form-control" name="patientLungs" placeholder="Respiratory Review">
 </div>
 
 
@@ -205,18 +209,6 @@
 </div>
 
 
-
-
-<div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name="pass" placeholder="Password">
-</div>
-
-
-  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="pass" placeholder="Password">
-    </div>
 
 
 
