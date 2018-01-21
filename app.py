@@ -72,7 +72,9 @@ def registerPatient():
         if request.method == 'POST':
             patients = mongo.db.patients
             patients.insert({'hospital' : session['username'], 'name' : request.form['name'], 'height' : request.form['height'], \
-            'weight' : request.form['weight'], 'age' : request.form['age'], 'bloodtype' : request.form['bloodtype'], 'gender': request.form['gender'], 'birthdate' : request.form['birthdate']})
+            'weight' : request.form['weight'], 'age' : request.form['age'], 'bloodtype' : request.form['bloodtype'], 'gender': request.form['gender'], \
+            'birthdate' : request.form['birthdate'], 'polyuria' : request.form['polyuria'], 'urine' : request.form['urine'], 'kidneyDisease' : request.form['kidneyDisease'], 'seizures' : request.form['seizures'], 'palpitations' : request.form['palpitations'], \
+             'smoking' : request.form['smoking'], 'insomnia' : request.form['insomnia'], 'blurredVision' : request.form['blurredVision'], 'HIVHepa' : request.form['HIVHepa'], 'eyes' :request.form['eyes'], 'patientLungs' : request.form['patientLungs'], })
             return render_template('registerPatient.html', success = "Success!!")
 
     return render_template('registerPatient.html')
