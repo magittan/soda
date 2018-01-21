@@ -38,7 +38,7 @@ def signup():
             session['username'] = request.form['username']
             return redirect(url_for('index'))
 
-        return 'That username already exists!'
+        return render_template('signup.html', error = "That username is already taken")
 
     return render_template('signup.html')
 
@@ -144,15 +144,23 @@ def registerPatient():
     return render_template('registerPatient.html')
 
 @app.route('/patients')
-#waits for a post request in order to get an image
 def patients():
     users = mongo.db.donors
     check = users.find({'hospital' : 'New Hope Hospital'})
-    print check
-    print 'check'
     for i in check:
         print i
     return render_template('patients.html')
+
+@app.route('/donate')
+def donate():
+    if request.method == 'POST':
+        users = mongo.db.users
+        login_user = users.find_one({'name' : request.form['deadman']})
+        hospital = request.form['hospital']
+
+
+    return render_template('donate.html')
+
 
 @app.route('/logout')
 def logout():
