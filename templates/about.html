@@ -6,9 +6,8 @@
     text-align: center
   }
 body{
-  text-align:center;
-  margin: 0;
-  padding: 0;
+  margin: 100 px;
+  padding: 100 px;
   height: 100vh;
 }
 img.center {
@@ -22,14 +21,8 @@ img.center {
 }
 </style>
 
+<body>
 <h1> <b>S</b>mart <b>O</b>rgan <b>D</b>onation <b>A</b>pp (SODA) </h1>
-
-<br />
-
-<h2> What is SODA? </h2>
-	<p> SODA is a Smart Organ Donation web app that supports the infrastructure for an organ donation network in local hospitals that can be implemented in rural situations.</p>
-
-<br />
 
 <div>
 <h2> Why SODA? </h2>
@@ -41,9 +34,13 @@ img.center {
 
   <p> The diagram below illustrates the current situation of organ donations in different countries. </p>
 
-<img src="{{url_for('static',filename='map.png')}}" alt="map"
-height="420">
-<p> <i> Reference: Global Observatory on Donation and Translantation (WHO-ONT) </i> </p>
+<div style="text-align: center">
+  <img src="{{url_for('static',filename='map.png')}}" alt="map"
+  height="420">
+  <p> <i> Reference: Global Observatory on Donation and Translantation (WHO-ONT) </i> </p>
+</div>
+
+
 
 </div>
 
@@ -51,8 +48,12 @@ height="420">
 
 <div>
 <h2> How does SODA work? </h2>
-  <p> SODA 
-</p>
+  <p> SODA uses geopositional data and an indepth patient history in line with a comprehensive algorithm to efficiently and rapidly match recently deceased registered donors to acceptors in dire need of organs. This virtual infrastructure currently only accomadates three major organs systems that account for the majority of organ transplants in developing countries: heart, lungs, kidneys. This system, can
+  in the future act in tandem with voice activated devices, such as the Amazon Alexa, in order to assist physicians with comprehensive pre-operational knowledge of patients previous history in order to save lives!!! and personalize patient care!!!</p>
+  <br>
+  <br>
+  <br>
 </div>
+</bodY>
 
 {% endblock %}
