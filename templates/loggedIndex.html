@@ -26,6 +26,10 @@
         center: {lat: {{lat}}, lng: {{lng}}},
         zoom: 8
       });
+      var marker = new google.maps.Marker({
+          position: {lat: {{lat}}, lng: {{lng}}},
+          map: map
+      });
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpTKOfOdXY27Plw6m0OnhAixPIB7mD9xQ&callback=initMap"

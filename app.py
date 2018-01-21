@@ -21,6 +21,8 @@ app.config['SECRET_KEY'] = "THISISSECRET"
 @app.route('/')
 def index():
     if session.get('logged_in') and session.get('lat_long'):
+        print session['lat_long']['lat']
+        print session['lat_long']['lng']
         return render_template('loggedIndex.html', name=session['username'], lat = session['lat_long']['lat'], lng =session['lat_long']['lng'])
 
     return render_template('index.html')
