@@ -157,8 +157,8 @@ def donate():
         users = mongo.db.users
         login_user = users.find_one({'name' : request.form['deadman']})
         hospital = request.form['hospital']
-
-
+        timeOfDeath = request.form['timeOfDeath']
+        
     return render_template('donate.html')
 
 
