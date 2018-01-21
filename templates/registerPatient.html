@@ -33,13 +33,6 @@
                     <input type="text" class="form-control" name="gender" placeholder="Patient Gender">
                 </div>
 
-                <div class="form-group">
-                  <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
-                     <input id="fileupload" name="myfile" type="file" />
-                     <input type="submit" value="submit" id="submit" />
-                  </form>
-                </div>
-
 
                 <div>
                     <legend>Patient Self-reported medical conditions and history </legend>
@@ -58,7 +51,7 @@
 </fieldset>
 
 <fieldset>
-<legend>Brown, red, or purple urine?</legend>
+<legend>Do you have brown, red, or purple urine?</legend>
 <div>
 <input type="checkbox"  name="urine" value="yes" />Yes <br />
 
@@ -240,37 +233,27 @@
 
 </div>
 
-<div>
-<input type="checkbox" id="acceptor" name="patientType" value="acceptor" />Cornea <br />
-
-</div>
-
 </fieldset>
 
 
 
-  </div>
 
+<div class="form-group">
+  <legend> Upload official patient medical records (PDF)</legend>
+  <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
+     <input id="fileupload" name="myfile" type="file" />
+     <input type="submit" value="submit" id="fileupload" />
+  </form>
+</div>
 
-
-
-
-
-
-
-
-
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="pass" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
-                     <input id="fileupload" name="myfile" type="file" />
-                     <input type="submit" value="submit" id="submit" />
+  <div class="form-group">
+    <legend> Upload patient headshot </legend>
+<form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
+ <input id="fileupload" name="myfile" type="file" />
+<input type="submit" value="submit" id="fileupload" />
                   </form>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+<button type="submit" class="btn btn-primary btn-block"> REGISTER</button>
             </form>
             <br>
 
