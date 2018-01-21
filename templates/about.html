@@ -5,6 +5,21 @@
   h1 {
     text-align: center
   }
+body{
+  text-align:center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+#particles-js
+{
+  height: 100%;
+  background: #fff;
+}
 </style>
 
 <h1> <b>S</b>mart <b>O</b>rgan <b>D</b>onation <b>A</b>pp (SODA) </h1>
@@ -18,27 +33,12 @@
 <p> One organ donor can save up to eight lives. One eye and tissue donor can save or improve the lives of up to 50 people. This means an organ, eye and tissue donor can potentially impact the lives of 58 people! Successful transplantation often is enhanced by the matching of organs between members of the same ethnic and racial group. </p>
 
 <h3> How does organ donation currently work in developing countries? </h3>
-  <p> Unfortunately, in many countries, there is no such infrastructure available that organizes organ donations and manages the information of patients efficiently, resulting in the loss of many lives. SODA hopes to bridges the gap between organ donors and receivers by providing an online platform which performs organ matching for heart, lung and liver, through utilizing Alexa.</p>
+  <p> Unfortunately, in many countries, there is no such infrastructure available that organizes organ donations and manages the information of patients efficiently, resulting in the loss of many lives. On average, 20 people die each day while waiting for a transplant. SODA hopes to bridges the gap between organ donors and receivers by providing an online platform which performs organ matching for heart, lung and liver, through utilizing Alexa.</p>
 
-  <p> The table below only lists some of the developing countries where organ donations are rare. </p>
-  
-<table>
-  <thead>
-  	<tr>
-  	  <th> Developing Country </th>
-  	  <th> Number of People Die due to Non-availability of organs </th>
-    </tr>
-  </thead>
-  <tbody>
-  	<tr>
-  		<td>India</td>
-  		<td>500,000</td>
-  	</tr>
-  	<tr>
-  		<td>China</td>
-  	</tr>
-  </tbody>
-</table>
+  <p> The table below only lists some of the developing countries where organ donations are rare, based on the statistics from the Global Observatory on Donation and Translantation (WHO-ONT). </p>
+
+<img src="{{url_for('static',filename='map.png')}}" alt="map"
+height="420">
 </div>
 
 <div>
