@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 import google.cloud
 import googlemaps
 import bcrypt
+import pprint
 
 app = Flask(__name__)
 
@@ -21,8 +22,6 @@ app.config['SECRET_KEY'] = "THISISSECRET"
 @app.route('/')
 def index():
     if session.get('logged_in') and session.get('lat_long'):
-        print session['lat_long']['lat']
-        print session['lat_long']['lng']
         return render_template('loggedIndex.html', name=session['username'], lat = session['lat_long']['lat'], lng =session['lat_long']['lng'])
 
     return render_template('index.html')
@@ -70,18 +69,89 @@ def login():
 def registerPatient():
     if session.get('logged_in'):
         if request.method == 'POST':
-            patients = mongo.db.patients
-            patients.insert({'hospital' : session['username'], 'name' : request.form['name'], 'height' : request.form['height'], \
-            'weight' : request.form['weight'], 'age' : request.form['age'], 'bloodtype' : request.form['bloodtype'], 'gender': request.form['gender'], \
-            'birthdate' : request.form['birthdate'], 'polyuria' : request.form['polyuria'], 'urine' : request.form['urine'], 'kidneyDisease' : request.form['kidneyDisease'], 'seizures' : request.form['seizures'], 'palpitations' : request.form['palpitations'], \
-             'smoking' : request.form['smoking'], 'insomnia' : request.form['insomnia'], 'blurredVision' : request.form['blurredVision'], 'HIVHepa' : request.form['HIVHepa'], 'eyes' :request.form['eyes'], 'patientLungs' : request.form['patientLungs'], })
-            return render_template('registerPatient.html', success = "Success!!")
+            print request.form['patientType']
+            print 'hospital'
+            print session['username']
+            print 'name'
+            print request.form['name']
+            print 'height'
+            print request.form['height']
+            print 'weight'
+            print request.form['weight']
+            print 'age'
+            print request.form['age']
+            print 'bloodtype'
+            print request.form['bloodtype']
+            print 'gender'
+            print request.form['gender']
+            print 'birthdate'
+            print request.form['birthdate']
+            print 'polyuria'
+            print request.form['polyuria']
+            print 'urine'
+            print request.form['urine']
+            print 'kidneyDisease'
+            print request.form['kidneyDisease']
+            print 'seizures'
+            print request.form['seizures']
+            print 'palpitations'
+            print request.form['palpitations']
+            print 'smoking'
+            print request.form['smoking']
+            print 'insomnia'
+            print request.form['insomnia']
+            print 'blurredVision'
+            print request.form['blurredVision']
+            print 'HIVHepa'
+            print request.form['HIVHepa']
+            print 'eyes'
+            print request.form['patientEyes']
+            print 'patientLungs'
+            print request.form['patientLungs']
+            print 'patientLungs'
+            print request.form['patientLungs']
+            print 'patientENT'
+            print request.form['patientENT']
+            print 'patientCardiovascular'
+            print request.form['patientCardiovascular']
+            print 'patientGastrointestinal'
+            print request.form['patientGastrointestinal']
+            print 'patientAllergic'
+            print request.form['patientAllergic']
+            print 'patientLymphatic'
+            print request.form['patientLymphatic']
+            print 'patientType'
+            print request.form['patientType']
+            print 'organRequest'
+
+            if request.form['patientType']=='donor':
+                donors = mongo.db.donors
+                donors.insert({'hospital' : session['username'], 'name' : request.form['name'], 'height' : request.form['height'], \
+                'weight' : request.form['weight'], 'age' : request.form['age'], 'bloodtype' : request.form['bloodtype'], 'gender': request.form['gender'], \
+                'birthdate' : request.form['birthdate'], 'polyuria' : request.form['polyuria'], 'urine' : request.form['urine'], 'kidneyDisease' : request.form['kidneyDisease'], 'seizures' : request.form['seizures'], 'palpitations' : request.form['palpitations'], \
+                'smoking' : request.form['smoking'], 'insomnia' : request.form['insomnia'], 'blurredVision' : request.form['blurredVision'], 'HIVHepa' : request.form['HIVHepa'], 'eyes' :request.form['patientEyes'], 'patientLungs' : request.form['patientLungs'], \
+                'patientLungs' : request.form['patientLungs'], 'patientENT' : request.form['patientENT'], 'patientCardiovascular' : request.form['patientCardiovascular'], 'patientGastrointestinal' : request.form['patientGastrointestinal'], 'patientAllergic' : request.form['patientAllergic'], 'patientLymphatic' : request.form['patientLymphatic'], \
+                'patientType' : request.form['patientType']})
+            else:
+                acceptors = mongo.db.acceptors
+                acceptors.insert({'hospital' : session['username'], 'name' : request.form['name'], 'height' : request.form['height'], \
+                'weight' : request.form['weight'], 'age' : request.form['age'], 'bloodtype' : request.form['bloodtype'], 'gender': request.form['gender'], \
+                'birthdate' : request.form['birthdate'], 'polyuria' : request.form['polyuria'], 'urine' : request.form['urine'], 'kidneyDisease' : request.form['kidneyDisease'], 'seizures' : request.form['seizures'], 'palpitations' : request.form['palpitations'], \
+                'smoking' : request.form['smoking'], 'insomnia' : request.form['insomnia'], 'blurredVision' : request.form['blurredVision'], 'HIVHepa' : request.form['HIVHepa'], 'eyes' :request.form['patientEyes'], 'patientLungs' : request.form['patientLungs'], \
+                'patientLungs' : request.form['patientLungs'], 'patientENT' : request.form['patientENT'], 'patientCardiovascular' : request.form['patientCardiovascular'], 'patientGastrointestinal' : request.form['patientGastrointestinal'], 'patientAllergic' : request.form['patientAllergic'], 'patientLymphatic' : request.form['patientLymphatic'], \
+                'patientType' : request.form['patientType'], 'organRequest' : request.form['organRequest']})
 
     return render_template('registerPatient.html')
 
 @app.route('/patients')
 #waits for a post request in order to get an image
 def patients():
+    users = mongo.db.donors
+    check = users.find({'hospital' : 'New Hope Hospital'})
+    print check
+    print 'check'
+    for i in check:
+        print i
     return render_template('patients.html')
 
 @app.route('/logout')
